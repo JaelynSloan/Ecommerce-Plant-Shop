@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jaelyn's Plant Shop</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/3e4d0c6727.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+  </head>
+
+  <!-----BODY------>
+  <body>
+    <!----HEADER----->
+    <section id="header">
+      <a href="index.html"><img src="images/logo.png" class="logo" /></a>
+      <h1>Jaelyn's Plant Shop</h1>
+      <div>
+        <!--NAVBAR-->
+        <ul id="navbar">
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="shop.html">Shop</a></li>
+          <li><a href="deals.html">Deals</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li>
+            <a href="cart.html" id="cart"
+              ><i class="fa-solid fa-basket-shopping"></i
+            ></a>
+          </li>
+          <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
+        </ul>
+      </div>
+      <div id="mobile">
+        <a href="cart.html" id="cart"
+          ><i class="fa-solid fa-basket-shopping"></i
+        ></a>
+        <i id="bar"><i class="fa-solid fa-bars"></i></i>
+      </div>
+    </section>
+
+    <!-- PRODUCT -->
+    <section id="prodetails" class="section-p1">
+      <div class="pro-img">
+        <img src="images/Shop/succ1.jpg" width="100%" id="mainImg" />
+        <div class="small-img-group">
+          <div class="small-img-col">
+            <img
+              src="images/Shop/succ2.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+          <div class="small-img-col">
+            <img
+              src="images/Shop/succ3.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+          <div class="small-img-col">
+            <img
+              src="images/Shop/succ4.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+          <div class="small-img-col">
+            <img
+              src="images/Shop/succ1.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="pro-details">
+        <button class="normal" onclick="history.back()">Back</button>
+        <h4>Succulent Name</h4>
+        <h2>$7.89</h2>
+        <input type="number" value="1" />
+        <button class="normal">Add to Cart</button>
+        <h4>Product Details</h4>
+        <span
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+          ipsa possimus dolorem blanditiis repudiandae dolores ad harum quas
+          nostrum! Officia, vitae officiis nisi eum error consequatur ipsa
+          itaque commodi eveniet.</span
+        >
+      </div>
+    </section>
+
+    <!-- RELATED ITEMS -->
+    <section id="product1" class="section-p1">
+      <h2>Related Items</h2>
+      <div class="pro-container">
+        <div class="pro">
+          <img src="images/Shop/flower4.jpg" alt="" />
+          <div class="description">
+            <h3>Flower Name</h3>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>$12.99</h4>
+          </div>
+          <a href="#" class="cart"
+            ><i class="fa-solid fa-cart-arrow-down"></i
+          ></a>
+        </div>
+        <div class="pro">
+          <img src="images/Shop/cactus5.jpg" alt="" />
+          <div class="description">
+            <h3>Cactus Name</h3>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>$8.99</h4>
+          </div>
+          <a href="#" class="cart"
+            ><i class="fa-solid fa-cart-arrow-down"></i
+          ></a>
+        </div>
+        <div class="pro">
+          <img src="images/Shop/flower5.jpg" alt="" />
+          <div class="description">
+            <h3>Flower Name</h3>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>$10.59</h4>
+          </div>
+          <a href="#" class="cart"
+            ><i class="fa-solid fa-cart-arrow-down"></i
+          ></a>
+        </div>
+        <div class="pro">
+          <img src="images/Shop/succ5.jpg" alt="" />
+          <div class="description">
+            <h3>Succulent Name</h3>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>$7.89</h4>
+          </div>
+          <a href="#" class="cart"
+            ><i class="fa-solid fa-cart-arrow-down"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!--NEWSLETTER-->
+    <section id="newsletter" class="section-p1">
+      <div class="newstext">
+        <h4>Sign Up For Our Newsletter</h4>
+        <p>
+          Get email updates and <span>special offers</span> daily, weekly, or
+          monthly!
+        </p>
+      </div>
+      <div class="form">
+        <input type="text" placeholder="Your Email Address" />
+        <button id="signUp" class="normal">Sign Up</button>
+        <div id="popup" class="popup">
+          <div class="popup-content">
+            <h1>You Have Successfully Been Signed Up!</h1>
+            <button id="closePopup">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--FOOTER-->
+    <footer class="section-p1">
+      <div class="col">
+        <h4>Contact</h4>
+        <p><strong>Address:</strong> 123 Address Rd</p>
+        <p><strong>Phone:</strong> 123-456-7890</p>
+        <p><strong>Hours:</strong> 10:00a - 10:00p Mon - Sat</p>
+        <div class="follow">
+          <h4>Follow us</h4>
+          <div class="icon">
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="https://www.twitter.com/" target="_blank"
+              ><i class="fa-brands fa-twitter"></i
+            ></a>
+            <a href="https://www.pinterest.com/" target="_blank"
+              ><i class="fa-brands fa-pinterest"></i
+            ></a>
+            <a href="https://www.youtube.com/" target="_blank"
+              ><i class="fa-brands fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <h4>About</h4>
+        <a href="about.html">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="login.html">Sign In</a>
+        <a href="cart.html">View Cart</a>
+        <a href="#">Help</a>
+      </div>
+      <div class="col install">
+        <h4>Install App</h4>
+        <p>From App Store or Google Play</p>
+        <div class="row">
+          <a href="https://www.apple.com/app-store/" target="_blank"
+            ><img src="images/app.jpg" alt=""
+          /></a>
+          <a
+            href="https://play.google.com/store/games?hl=en_US&gl=US"
+            target="_blank"
+            ><img src="images/play.jpg" alt=""
+          /></a>
+        </div>
+        <p>Secure Payment Methods</p>
+        <img src="images/pay.png" alt="" />
+      </div>
+      <div class="copyright">
+        <p>&copy; 2023, Jaelyn Sloan - Ecommerce Website</p>
+      </div>
+    </footer>
+
+    <!-- JS IMAGE DISPLAY -->
+    <script>
+      var mainImg = document.getElementById("mainImg");
+      var smallImg = document.getElementsByClassName("small-img");
+
+      smallImg[0].onclick = function () {
+        mainImg.src = smallImg[0].src;
+      };
+      smallImg[1].onclick = function () {
+        mainImg.src = smallImg[1].src;
+      };
+      smallImg[2].onclick = function () {
+        mainImg.src = smallImg[2].src;
+      };
+      smallImg[3].onclick = function () {
+        mainImg.src = smallImg[3].src;
+      };
+    </script>
+
+    <script>
+      signUp.addEventListener("click", function () {
+        popup.classList.add("show");
+      });
+      closePopup.addEventListener("click", function () {
+        popup.classList.remove("show");
+      });
+      window.addEventListener("click", function (event) {
+        if (event.target == popup) {
+          popup.classList.remove("show");
+        }
+      });
+    </script>
+  </body>
+</html>
