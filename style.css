@@ -303,8 +303,10 @@
   align-items: center;
   background-image: url(images/banner.jpg);
   background-repeat: no-repeat;
-  background-position: 20% 30%;
   background-color: #2e8b57;
+  background-size: cover;
+  background-position: center;
+  margin: 20px 0;
 }
 #newsletter h4 {
   font-size: 40px;
@@ -598,6 +600,10 @@ footer .copyright {
 #prod-deals .pro .description s {
   color: red;
 }
+/* Deals Single Page */
+.pro-details s {
+  color: red;
+}
 /* ------------------ABOUT------------------ */
 #banner1 {
   display: flex;
@@ -712,7 +718,7 @@ table {
 th {
   width: 80%;
   text-align: left;
-  padding: 5px;
+  padding: 10px;
   color: #777;
   background: #d0f0c0;
   font-weight: 600;
@@ -720,10 +726,15 @@ th {
 #cart-body td {
   padding: 10px 5px;
 }
+#cart {
+  font-size: 20px;
+}
 #cart-body input {
   width: 40px;
   height: 30px;
   padding: 5px;
+  outline: none;
+  font-size: 16px;
 }
 .cart-info {
   display: flex;
@@ -731,7 +742,10 @@ th {
 }
 .cart-info a {
   color: #d0f0c0;
-  font-size: 12px;
+  font-size: 18px;
+}
+#cart-name a {
+  text-decoration: none;
 }
 .cart-info img {
   width: 15%;
@@ -935,8 +949,23 @@ th:last-child {
   #banner {
     height: 40vh;
   }
+  #banner h2 {
+    font-size: 30px;
+  }
+  #banner h3 {
+    font-size: 20px;
+  }
+  #banner h4 {
+    font-size: 16px;
+  }
   #newsletter {
     padding: 40px 20px;
+  }
+  #newsletter h4 {
+    font-size: 30px;
+  }
+  #newsletter p {
+    font-size: 16px;
   }
   #newsletter .form {
     width: 100%;
