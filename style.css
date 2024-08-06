@@ -74,6 +74,7 @@ header h1 {
 #navbar li a {
     color: #777;
     text-decoration: none;
+    display: block; /* Ensure the anchor tag takes up the full space of the list item */
 }
 
 #navbar li {
@@ -89,33 +90,30 @@ header h1 {
     transition: color 0.5s;
 }
 
-#navbar li:hover {
-    color: #fff;
-}
+    #navbar li:hover a {
+        color: #fff; /* Change text color on hover */
+    }
 
-#navbar li a:hover {
-    color: #fff;
-}
+    #navbar li::after {
+        content: "";
+        background: #2e8b57;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        opacity: 0;
+        transition: top 0.5s, opacity 0.5s;
+    }
 
-#navbar li::after {
-    content: "";
-    background: #2e8b57;
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    opacity: 0;
-    transition: top 0.5s, opacity 0.5s;
-}
+    #navbar li:hover::after {
+        top: 50%;
+        opacity: 1;
+    }
 
-#navbar li:hover::after {
-    top: 50%;
-    opacity: 1;
-}
 
 #mobile {
     display: none;
@@ -734,7 +732,7 @@ footer .copyright {
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
-#prod-deals .pro .description s {
+#prod-deals .pro .description h4 s {
     color: red;
 }
 

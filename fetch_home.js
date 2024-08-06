@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             productContainer.innerHTML = firstEightProducts.map(product => {
                 const price = parseFloat(product.price); // Ensure price is treated as a number
                 return `
-      <div class="pro" onclick="window.location.href='product-${product.id}.html'">
+      <div class="pro" onclick="window.location.href='product.html?id=${product.id}'">
         <img src="${product.image_url}" alt="${product.name}" />
         <div class="description">
           <h3>${product.name}</h3>
