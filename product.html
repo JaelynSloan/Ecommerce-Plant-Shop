@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/3e4d0c6727.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <script src="product.js" defer></script>
 </head>
+
 <body>
     <!-- HEADER -->
     <header>
@@ -16,7 +24,7 @@
             <div>
                 <!--NAVBAR-->
                 <ul id="navbar">
-                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
                     <li><a href="deals.html">Deals</a></li>
                     <li><a href="about.html">About</a></li>
@@ -50,6 +58,7 @@
             <span id="productDescription"></span>
         </div>
     </section>
+
 
     <!-- RELATED ITEMS -->
 
@@ -137,18 +146,21 @@
         var mainImg = document.getElementById("mainImg");
         var smallImgs = document.getElementById("smallImgs");
 
-        function setMainImage(src) {
+        function setMainImage(src)
+        {
             mainImg.src = src;
         }
 
-        function addSmallImage(src) {
+        function addSmallImage(src)
+        {
             var imgCol = document.createElement('div');
             imgCol.classList.add('small-img-col');
             var img = document.createElement('img');
             img.src = src;
             img.width = 100;
             img.classList.add('small-img');
-            img.onclick = function () {
+            img.onclick = function ()
+            {
                 setMainImage(src);
             };
             imgCol.appendChild(img);
@@ -156,4 +168,5 @@
         }
     </script>
 </body>
+
 </html>

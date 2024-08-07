@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Playfair Display", serif;
+    font-family: "EB Garamond", serif;
 }
 
 .section-m1 {
@@ -14,17 +14,14 @@
 }
 
 .normal {
+    font-size: 16px;
     border: none;
-    background: #2e8b57;
-    background-image: -webkit-linear-gradient(top, #2e8b57, #01662d);
-    background-image: -moz-linear-gradient(top, #2e8b57, #01662d);
-    background-image: -ms-linear-gradient(top, #2e8b57, #01662d);
-    background-image: -o-linear-gradient(top, #2e8b57, #01662d);
-    background-image: linear-gradient(to bottom, #2e8b57, #01662d);
+    background: #618264;
     cursor: pointer;
     color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
+    transition: transform 0.5s, opacity 0.5s, box-shadow 0.2s;
 }
 
 .normal:hover {
@@ -34,7 +31,7 @@
 /* ------------------Header------------------ */
 header {
     padding: 5px 50px;
-    background: #fff;
+    background: #618264;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     position: sticky;
     z-index: 999;
@@ -61,20 +58,22 @@ header {
 }
 
 .logo {
-    width: 100px;
+    width: 60%;
 }
 
 header h1 {
-    color: #777;
-    font-size: 36px;
+    color: #D0E7D2;
+    font-size: 40px;
     font-variant: small-caps;
 }
 
 /* Navbar buttons */
 #navbar li a {
-    color: #777;
+    color: #D0E7D2;
+    font-weight: 500;
     text-decoration: none;
-    display: block; /* Ensure the anchor tag takes up the full space of the list item */
+    display: block;
+    transition: transform 0.5s, opacity 0.5s;
 }
 
 #navbar li {
@@ -90,29 +89,10 @@ header h1 {
     transition: color 0.5s;
 }
 
-    #navbar li:hover a {
-        color: #fff; /* Change text color on hover */
-    }
+#navbar li:hover a {
+    transform: translateY(-0.25em);
 
-    #navbar li::after {
-        content: "";
-        background: #2e8b57;
-        width: 100%;
-        height: 100%;
-        border-radius: 30px;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: -1;
-        opacity: 0;
-        transition: top 0.5s, opacity 0.5s;
-    }
-
-    #navbar li:hover::after {
-        top: 50%;
-        opacity: 1;
-    }
+}
 
 
 #mobile {
@@ -142,9 +122,10 @@ header h1 {
 
 
 .home-txt {
+    color: #000000;
     padding: 20px;
     text-align: center;
-    background-color: hsla(100, 62%, 85%, 0.75);
+    background-color: #618264;
     border-radius: 25px;
     max-width: 400px;
     margin-right: 20px;
@@ -158,37 +139,31 @@ header h1 {
 
 .home-txt a {
     display: block;
-    color: #777;
+    color: #000000;
     font-weight: bold;
-    background-color: #fff;
-    border: none;
+    border: 2px solid #D0E7D2;
+    border-radius: 10px;
     padding: 15px 32px;
     text-decoration: none;
     font-size: 20px;
-    border-radius: 30px;
     margin: 20px auto;
-    transition: background-color 0.5s, color 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
 }
 
 .home-txt a:hover {
-    background-color: #2e8b57;
-    color: #fff;
+    transform: translateY(-0.25em);
 }
 
 /* Slideshow */
 .swiper-wrapper-container {
     width: 100%;
-    /* Adjust width as needed */
     max-width: 1000px;
-    /* Increase max-width to make it bigger */
     margin: 0 auto;
 }
 
 .swiper {
     width: 100%;
-    /* Make swiper take full width of the wrapper */
     height: 80vh;
-    /* Increase height for a bigger swiper */
     position: relative;
     border-radius: 30px;
 }
@@ -214,6 +189,7 @@ header h1 {
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    padding: 20px;
 }
 
 .swiper .swiper-button-prev {
@@ -228,14 +204,12 @@ header h1 {
     position: absolute;
     bottom: 10px;
     width: 100%;
-    /* Ensure it takes the full width */
     text-align: center;
-    /* Center the pagination bullets */
     z-index: 10;
 }
 
 .swiper .swiper-pagination-bullet-active {
-    background: #d0f0c0;
+    background: #618264;
 }
 
 .swiper-slide {
@@ -256,9 +230,10 @@ header h1 {
 /* ------------------NEW ARRIVALS------------------ */
 #product1 {
     text-align: center;
-    background-image: url(images/background2.jpg);
+    /*background-image: url(images/background2.jpg);
     background-position: top 25% right 0;
-    background-size: cover;
+    background-size: cover;*/
+    background-color: #B0D9B1;
 }
 
 #product1 .pro-container {
@@ -269,7 +244,7 @@ header h1 {
 }
 
 #product1 h2 {
-    color: #fff;
+    color: #361500;
     font-size: 40px;
     font-variant: small-caps;
 }
@@ -414,22 +389,16 @@ header h1 {
 #newsletter input {
     height: 3.125rem;
     padding: 0 1.25em;
-    font-size: 14px;
+    font-size: 16px;
     width: 100%;
     border: 1px solid transparent;
     border-radius: 10px;
     outline: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
     margin: 0 10px;
 }
 
 #newsletter button {
-    background-color: #2e8b57;
-    color: white;
     white-space: nowrap;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
 }
 
 .popup {
@@ -444,42 +413,44 @@ header h1 {
     display: none;
 }
 
+.popup.show {
+    display: block;
+    /* Show popup when .show class is added */
+}
+
 .popup-content {
     background-color: white;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888888;
-    width: 30%;
+    width: 40%;
     font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 10px;
 }
 
-.popup-content h1 {
+
+#popupMessage {
     margin-bottom: 10px;
 }
 
 .popup-content button {
-    display: block;
+    font-size: 16px;
     margin: 0 auto;
-    cursor: pointer;
-    border-radius: none;
-    background: #2e8b57;
     padding: 10px 10px;
+    background-color: #618264;
     color: #fff;
     border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .popup-content button:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.show {
-    display: block;
-}
-
-#signUp {
-    border-radius: 10px;
-    padding: 10px 10px;
-}
 
 /* ------------------FOOTER------------------ */
 footer {
@@ -557,7 +528,7 @@ footer .copyright {
 #pagination a {
     text-decoration: none;
     color: #fff;
-    background-color: #2e8b57;
+    background-color: #618264;
     padding: 15px 20px;
     border-radius: 4px;
     font-weight: 600;
@@ -571,26 +542,50 @@ footer .copyright {
 /* ------------------SINGLE PRODUCT PAGE ------------------ */
 #prodetails {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
 }
 
 #prodetails .pro-img {
-    width: 40%;
+    width: 100%;
+    max-width: 800px;
     margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mainImg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #79AC78;
 }
 
 .small-img-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .small-img-col {
-    flex-basis: 24%;
+    flex: 0 0 auto;
+    width: 100px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
+.small-img-col img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid #79AC78;
+}
+
 #prodetails .pro-details {
-    width: 50%;
     padding-top: 30px;
 }
 
@@ -796,7 +791,8 @@ footer .copyright {
     align-items: center;
     margin: 30px;
     border: 1px solid #b0b0b0;
-    background-color: #d0f0c0;
+    border-radius: 10px;
+    background-color: #B0D9B1;
 }
 
 #contact-form form {

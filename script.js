@@ -48,6 +48,17 @@ document.addEventListener("DOMContentLoaded", function ()
     popup.classList.remove("show");
   });
 
+  closePopup.addEventListener("click", function ()
+  {
+    popup.classList.remove("show");
+  });
+
+
+  closePopup.addEventListener("click", function ()
+  {
+    popup.classList.remove("show");
+  });
+
   window.addEventListener("click", function (event)
   {
     if (event.target == popup)

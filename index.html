@@ -7,11 +7,10 @@
     <title>Jaelyn's Plant Shop</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/3e4d0c6727.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 </head>
@@ -56,16 +55,19 @@
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <a href="product-succ.html"><img src="images/Slides/succulent-s1.jpg"
-                                    alt="image of succulent in pot" /></a>
+                            <a href="product.html?id=4">
+                                <img src="images/Slides/succulent-s1.jpg" alt="image of succulent in pot" />
+                            </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="product-flo.html"><img src="images/Slides/flower-s2.jpg"
-                                    alt="image of flowers" /></a>
+                            <a href="product.html?id=5">
+                                <img src="images/Slides/flower-s2.jpg" alt="image of flowers" />
+                            </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="product-bouq.html"><img src="images/Slides/bouquet-s3.jpg"
-                                    alt="image of flower bouquet" /></a>
+                            <a href="product.html?id=11">
+                                <img src="images/Slides/bouquet-s3.jpg" alt="image of flower bouquet" />
+                            </a>
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
@@ -73,6 +75,7 @@
                     <div class="swiper-button-next"></div>
                 </div>
             </div>
+
         </section>
 
         <!-- NEW ARRIVALS -->
@@ -100,7 +103,7 @@
             <p>Get email updates and <span>special offers</span> daily, weekly, or monthly!</p>
         </div>
         <div class="form">
-            <input type="text" id="emailInput" placeholder="Your Email Address">
+            <input type="email" id="emailInput" placeholder="Your Email Address" required>
             <button id="signUp" class="normal">Sign Up</button>
             <div id="popup" class="popup">
                 <div class="popup-content">
@@ -110,6 +113,7 @@
             </div>
         </div>
     </section>
+
 
     <!--FOOTER-->
     <footer class="section-p1">
@@ -191,6 +195,7 @@
     </script>
 
     <script src="fetch_home.js"></script>
+    <script src="script.js"></script>
 
 
 </body>

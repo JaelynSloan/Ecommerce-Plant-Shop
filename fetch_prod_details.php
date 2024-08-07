@@ -15,7 +15,7 @@ try {
     }
 
     // Prepare the SQL statement to prevent SQL injection
-    $stmt = $con->prepare('SELECT * FROM products WHERE id = ?');
+    $stmt = $con->prepare('SELECT name, description, price, image_url, image2_url, image3_url, image4_url, image5_url FROM products WHERE id = ?');
     if (!$stmt) {
         throw new Exception("Prepare statement failed: " . $con->error);
     }
@@ -25,17 +25,14 @@ try {
     $product = $result->fetch_assoc();
 
     if ($product) {
-        // Fetch additional images if any
-        $stmt = $con->prepare('SELECT image_url FROM products WHERE id = ?');
-        if (!$stmt) {
-            throw new Exception("Prepare statement failed: " . $con->error);
+        // Collect additional images
+        $additional_images = [];
+        for ($i = 2; $i <= 5; $i++) {
+            if (!empty($product["image{$i}_url"])) {
+                $additional_images[] = $product["image{$i}_url"];
+            }
         }
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $additional_images = $result->fetch_all(MYSQLI_ASSOC);
-
-        $product['additional_images'] = array_column($additional_images, 'image_url');
+        $product['additional_images'] = $additional_images;
         echo json_encode($product);
     } else {
         echo json_encode(['error' => 'Product not found']);
