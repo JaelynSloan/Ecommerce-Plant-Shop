@@ -331,6 +331,16 @@ header h1 {
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
+.star {
+    display: flex;
+}
+
+.star i {
+    color: gold;
+    /* Change to the color you prefer */
+}
+
+
 /* ------------------BANNER------------------ */
 #banner {
     display: flex;
@@ -635,18 +645,31 @@ footer .copyright {
     color: #fff;
     border: 1px solid #777;
     width: auto;
-    /* Adjusted width */
     padding: 10px 20px;
-    /* Added padding for better appearance */
     display: inline-block;
 }
 
 #prodetails .pro-details span {
     line-height: 25px;
-    white-space: pre-line;
     font-size: 16px;
 }
 
+#priceContainer {
+    display: flex;
+    align-items: center;
+}
+
+#discountPrice {
+    font-size: 26px;
+    color: #000;
+}
+
+#regularPrice {
+    font-size: 20px;
+    color: red;
+    text-decoration: line-through;
+    margin-right: 20px;
+}
 
 
 

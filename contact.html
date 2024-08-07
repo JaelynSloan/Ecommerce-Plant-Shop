@@ -48,15 +48,17 @@
 
   <!-- CONTACT FORM -->
   <section id="contact-form">
-    <form action="">
+    <form id="contactForm">
       <span>Leave a Message</span>
       <h2>We would love to hear from you!</h2>
-      <input type="text" placeholder="Your Name" />
-      <input type="text" placeholder="Your Email" />
-      <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
       <button type="submit" class="normal">Submit</button>
+      <div id="formMessage"></div>
     </form>
   </section>
+
   <!-- CONTACT DETAILS -->
   <section id="contact-details" class="section-p1">
     <div class="details">
@@ -156,6 +158,42 @@
       <p>&copy; 2023, Jaelyn Sloan - Ecommerce Website</p>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function ()
+    {
+      var form = document.getElementById("contactForm");
+      form.addEventListener("submit", handleFormSubmit);
+    });
+
+    function handleFormSubmit(event)
+    {
+      event.preventDefault(); // Prevent default form submission
+
+      var form = document.getElementById("contactForm");
+      var formData = new FormData(form);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "submit_contact.php", true);
+      xhr.onload = function ()
+      {
+        var response = JSON.parse(xhr.responseText);
+        var msgElement = document.getElementById("formMessage");
+
+        if (xhr.status === 200 && response.success)
+        {
+          form.reset(); // Clear the form
+          msgElement.textContent = response.message;
+          msgElement.style.color = "green";
+        } else
+        {
+          msgElement.textContent = response.message;
+          msgElement.style.color = "red";
+        }
+      };
+      xhr.send(formData);
+    }
+  </script>
 
   <script src="script.js"></script>
 </body>
