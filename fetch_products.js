@@ -1,17 +1,21 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Fetch Products
+document.addEventListener("DOMContentLoaded", function ()
+{
     fetch('fetch_products.php')
         .then(response => response.json())
-        .then(products => {
-            if (products.error) {
+        .then(products =>
+        {
+            console.log(products);  // Debugging: Check the fetched products
+            if (products.error)
+            {
                 console.error(products.error);
                 return;
             }
             const productContainer = document.getElementById('product-container');
-            productContainer.innerHTML = products.map(product => {
+            productContainer.innerHTML = products.map(product =>
+            {
                 const price = parseFloat(product.price); // Ensure price is treated as a number
                 return `
-                      <div class="pro" onclick="window.location.href='product-${product.id}.html'">
+                      <div class="pro" onclick="window.location.href='product.php?id=${product.id}'">
                           <img src="${product.image_url}" alt="${product.name}" />
                           <div class="description">
                               <h3>${product.name}</h3>
@@ -26,5 +30,5 @@ document.addEventListener("DOMContentLoaded", function () {
                   `;
             }).join('');
         })
-            .catch(error => console.error('Error fetching products:', error));
+        .catch(error => console.error('Error fetching products:', error));
 });

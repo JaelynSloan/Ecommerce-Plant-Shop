@@ -1,19 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Fetch Products
-    fetch('fetch_products.php')
-        .then(response => response.json())
-        .then(products => {
-            if (products.error) {
-                console.error(products.error);
-                return;
-            }
-            const productContainer = document.getElementById('product-container');
-            // Display only the first 8 products
-            const firstEightProducts = products.slice(0, 8);
-            productContainer.innerHTML = firstEightProducts.map(product => {
-                const price = parseFloat(product.price); // Ensure price is treated as a number
-                return `
-      <div class="pro" onclick="window.location.href='product.html?id=${product.id}'">
+document.addEventListener("DOMContentLoaded", function ()
+{
+  // Fetch Products
+  fetch('fetch_products.php')
+    .then(response => response.json())
+    .then(products =>
+    {
+      if (products.error)
+      {
+        console.error(products.error);
+        return;
+      }
+      const productContainer = document.getElementById('product-container');
+      // Display only the first 8 products
+      const firstEightProducts = products.slice(0, 8);
+      productContainer.innerHTML = firstEightProducts.map(product =>
+      {
+        const price = parseFloat(product.price); // Ensure price is treated as a number
+        return `
+      <div class="pro" onclick="window.location.href='product.php?id=${product.id}'">
         <img src="${product.image_url}" alt="${product.name}" />
         <div class="description">
           <h3>${product.name}</h3>
@@ -26,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <a href="#" class="cart"><i class="fa-solid fa-cart-arrow-down"></i></a>
       </div>
     `;
-            }).join('');
-        })
-        .catch(error => console.error('Error fetching products:', error));
+      }).join('');
+    })
+    .catch(error => console.error('Error fetching products:', error));
 });

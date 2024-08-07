@@ -1,20 +1,24 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function ()
+{
     // Fetch Products
     fetch('fetch_products.php')
         .then(response => response.json())
-        .then(products => {
-            if (products.error) {
+        .then(products =>
+        {
+            if (products.error)
+            {
                 console.error(products.error);
                 return;
             }
             const productContainer = document.getElementById('product-container');
             productContainer.innerHTML = products
                 .filter(product => product.discount_price !== null) // Filter products with discount_price
-                .map(product => {
+                .map(product =>
+                {
                     const price = parseFloat(product.price); // Ensure price is treated as a number
                     const discountPrice = parseFloat(product.discount_price); // Ensure discount_price is treated as a number
                     return `
-                        <div class="pro" onclick="window.location.href='product-${product.id}.html'">
+                        <div class="pro" onclick="window.location.href='product.php?id=${product.id}'">
                             <img src="${product.image_url}" alt="${product.name}" />
                             <div class="description">
                                 <h3>${product.name}</h3>

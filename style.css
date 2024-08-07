@@ -122,29 +122,36 @@ header h1 {
 
 
 .home-txt {
-    color: #000000;
+    color: white;
     padding: 20px;
     text-align: center;
-    background-color: #618264;
+    background: rgba(97, 130, 100, .8);
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
     border-radius: 25px;
     max-width: 400px;
     margin-right: 20px;
     margin: 0 auto;
+
 }
 
 .home-txt h3 {
-    margin: 2% 2px;
-    font-size: 36px;
+    font-size: 28px !important;
+    padding: 15px;
+    text-align: center;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
 }
 
 .home-txt a {
     display: block;
-    color: #000000;
+    color: #fff;
     font-weight: bold;
+    background: rgba(176, 217, 177, .5);
     border: 2px solid #D0E7D2;
+    border-color: #4c654e;
     border-radius: 10px;
-    padding: 15px 32px;
+    padding: 8px;
     text-decoration: none;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
     font-size: 20px;
     margin: 20px auto;
     transition: transform 0.5s, opacity 0.5s;
