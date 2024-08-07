@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function ()
                     const price = parseFloat(product.price); // Ensure price is treated as a number
                     const discountPrice = parseFloat(product.discount_price); // Ensure discount_price is treated as a number
                     return `
-                        <div class="pro" onclick="window.location.href='product.php?id=${product.id}'">
+                        <div class="pro" onclick="window.location.href='product_disc.php?id=${product.id}'">
                             <img src="${product.image_url}" alt="${product.name}" />
                             <div class="description">
                                 <h3>${product.name}</h3>

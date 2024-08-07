@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function ()
 {
+    // Fetch Products
     fetch('fetch_products.php')
         .then(response => response.json())
         .then(products =>
         {
-            console.log(products);  // Debugging: Check the fetched products
             if (products.error)
             {
                 console.error(products.error);

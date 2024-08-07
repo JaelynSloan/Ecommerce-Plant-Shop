@@ -19,7 +19,6 @@ if (!$product) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,9 +30,8 @@ if (!$product) {
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet" />
-    <script src="product.js" defer></script>
+    <script src="product_disc.js" defer></script>
 </head>
-
 <body>
     <!-- HEADER -->
     <header>
@@ -63,29 +61,42 @@ if (!$product) {
 
     <!-- PRODUCT DETAILS -->
     <main>
-    <section id="prodetails" class="section-p1">
-        <div class="pro-img">
-            <img id="mainImg" src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100%">
-            <div class="small-img-group" id="smallImgs">
+        <section id="prodetails" class="section-p1">
+            <div class="pro-img">
+                <img id="mainImg" src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100%">
+                <div class="small-img-group" id="smallImgs">
+                    <?php
+                    $small_images = [
+                        $product['image2_url'],
+                        $product['image3_url'],
+                        $product['image4_url'],
+                        $product['image5_url5']
+                    ];
+
+                    foreach ($small_images as $image) {
+                        if (!empty($image)) {
+                            echo '<div class="small-img-col">
+                                    <img src="' . htmlspecialchars($image) . '" width="100" class="small-img" />
+                                  </div>';
+                        }
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
-        <div class="pro-details">
-            <button class="normal" onclick="history.back()">Back</button>
-            <h4 id="productName"><?php echo htmlspecialchars($product['name']); ?></h4>
-            <h2 id="productPrice">$<?php echo number_format($product['price'], 2); ?></h2>
-            <input type="number" value="1">
-            <button class="normal">Add to Cart</button>
-            <br></br>
-            <span id="productDescription"><?php echo nl2br(htmlspecialchars($product['description'])); ?></span>
-        </div>
-    </section>
-</main>
-
-    
-
-
-    <!-- RELATED ITEMS -->
-
+            <div class="pro-details">
+                <button class="normal" onclick="history.back()">Back</button>
+                <h4 id="productName"><?php echo htmlspecialchars($product['name']); ?></h4>
+                <div id="priceContainer">
+                    <h2 id="regularPrice">$<?php echo number_format($product['price'], 2); ?></h2> 
+                    <h2 id="discountPrice">$<?php echo number_format($product['discount_price'], 2); ?></h2>
+                </div>
+                <input type="number" value="1">
+                <button class="normal">Add to Cart</button>
+                <br></br>
+                <span id="productDescription"><?php echo nl2br(htmlspecialchars($product['description'])); ?></span>
+            </div>
+        </section>
+    </main>
 
     <!--NEWSLETTER-->
     <section id="newsletter" class="section-p1">
@@ -164,35 +175,23 @@ if (!$product) {
             <p>&copy; 2023, Jaelyn Sloan - Ecommerce Website</p>
         </div>
     </footer>
-
     <script>
         // Handle main and small images display
         var mainImg = document.getElementById("mainImg");
         var smallImgs = document.getElementById("smallImgs");
 
-        function setMainImage(src)
-        {
+        function setMainImage(src) {
             mainImg.src = src;
         }
 
-        function addSmallImage(src)
-        {
-            var imgCol = document.createElement('div');
-            imgCol.classList.add('small-img-col');
-            var img = document.createElement('img');
-            img.src = src;
-            img.width = 100;
-            img.classList.add('small-img');
-            img.onclick = function ()
-            {
-                setMainImage(src);
-            };
-            imgCol.appendChild(img);
-            smallImgs.appendChild(imgCol);
-        }
+        // Add event listener to each small image
+        document.querySelectorAll('.small-img').forEach(function(img) {
+            img.addEventListener('click', function() {
+                setMainImage(this.src);
+            });
+        });
     </script>
 </body>
-
 </html>
 
 <?php

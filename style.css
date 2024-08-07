@@ -15,12 +15,13 @@
 
 .normal {
     font-size: 16px;
-    border: none;
-    background: #618264;
-    cursor: pointer;
-    color: #fff;
-    border-radius: 10px;
     padding: 10px 10px;
+    background-color: #618264;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
     transition: transform 0.5s, opacity 0.5s, box-shadow 0.2s;
 }
 
@@ -173,6 +174,7 @@ header h1 {
     height: 80vh;
     position: relative;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .swiper-wrapper {
@@ -234,13 +236,13 @@ header h1 {
     font-size: 30px;
 }
 
-/* ------------------NEW ARRIVALS------------------ */
+/* ------------------PRODUCT DISPLAYS------------------ */
 #product1 {
     text-align: center;
     /*background-image: url(images/background2.jpg);
     background-position: top 25% right 0;
     background-size: cover;*/
-    background-color: #B0D9B1;
+    background-color: #a0b4a2;
 }
 
 #product1 .pro-container {
@@ -251,9 +253,10 @@ header h1 {
 }
 
 #product1 h2 {
-    color: #361500;
+    color: white;
     font-size: 40px;
     font-variant: small-caps;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
 }
 
 #product1 .pro {
@@ -262,7 +265,7 @@ header h1 {
     padding: 10px 12px;
     background-color: #e8e8e8;
     border: 2px solid #b0b0b0;
-    border-radius: 25px;
+    border-radius: 10px;
     cursor: pointer;
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
     margin: 30px 30px;
@@ -277,7 +280,7 @@ header h1 {
 
 #product1 .pro img {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 90%;
     max-height: 200px;
     height: 70%;
@@ -304,6 +307,10 @@ header h1 {
     padding-top: 7px;
     font-size: 15px;
     font-weight: 700;
+}
+
+#product1 .pro .description h4 s {
+    color: red;
 }
 
 #product1 .pro .cart {
@@ -550,13 +557,13 @@ footer .copyright {
 #prodetails {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
 #prodetails .pro-img {
     width: 100%;
-    max-width: 800px;
-    margin-right: 50px;
+    max-width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -593,16 +600,9 @@ footer .copyright {
 }
 
 #prodetails .pro-details {
+    width: 100%;
+    max-width: 45%;
     padding-top: 30px;
-}
-
-#prodetails .pro-details button {
-    color: #fff;
-    border: none;
-    background-color: #2e8b57;
-    padding: 5px 5px;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 #prodetails .pro-details button:hover {
@@ -634,11 +634,21 @@ footer .copyright {
 #prodetails .pro-details button {
     color: #fff;
     border: 1px solid #777;
+    width: auto;
+    /* Adjusted width */
+    padding: 10px 20px;
+    /* Added padding for better appearance */
+    display: inline-block;
 }
 
 #prodetails .pro-details span {
     line-height: 25px;
+    white-space: pre-line;
+    font-size: 16px;
 }
+
+
+
 
 /* ------------------DEALS------------------ */
 #prod-deals {
