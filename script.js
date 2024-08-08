@@ -1,25 +1,6 @@
 document.addEventListener("DOMContentLoaded", function ()
 {
-  // Mobile Navbar
-  const bar = document.getElementById("bar");
-  const close = document.getElementById("close");
-  const nav = document.getElementById("navbar");
 
-  if (bar)
-  {
-    bar.addEventListener("click", () =>
-    {
-      nav.classList.add("active");
-    });
-  }
-
-  if (close)
-  {
-    close.addEventListener("click", () =>
-    {
-      nav.classList.remove("active");
-    });
-  }
 
   // Newsletter Sign Up
   const signUp = document.getElementById("signUp");
@@ -66,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function ()
       popup.classList.remove("show");
     }
   });
+
 
 
   // // Drag-able scroll bar

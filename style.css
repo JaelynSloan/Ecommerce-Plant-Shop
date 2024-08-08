@@ -29,6 +29,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
+
 /* ------------------Header------------------ */
 header {
     padding: 5px 50px;
@@ -96,7 +97,8 @@ header h1 {
 
 }
 
-.sign_in {
+.sign_in,
+.sign_out {
     font-size: 16px;
 }
 
@@ -107,6 +109,87 @@ header h1 {
 
 #close {
     display: none;
+}
+
+/* ------------------LOGIN/REGISTER------------------ */
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-color: #f4f4f4;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Input field styling */
+.form-container input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-container button {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+
+/* Error and success message styling */
+.error-message {
+    color: #f44336;
+    /* Red color for errors */
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.success-message {
+    color: #4caf50;
+    /* Green color for success */
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Link styling */
+.form-container a {
+    color: #618264;
+    /* Blue color */
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
 }
 
 /* ------------------HOMEPAGE------------------ */
@@ -120,9 +203,10 @@ header h1 {
 }
 
 .home-txt {
+    flex: 1;
     text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
+    margin: auto 20px;
+    /* CHANGE MARGIN?  */
 }
 
 .home-txt h1 {
@@ -156,10 +240,11 @@ header h1 {
 
 /* Slideshow */
 .home-img {
+    flex: 1.25;
     background-image: url("images/background.jpg");
     background-size: cover;
     padding: 80px 100px;
-    margin: 40px;
+    margin: 20px 40px;
     display: flex;
     align-items: center;
     border-radius: 5px;
@@ -192,8 +277,9 @@ header h1 {
 }
 
 .swiper-txt p {
-    font-size: 20px;
+    font-size: 22px;
     padding-bottom: 20px;
+    text-align: center;
 }
 
 .swiper-txt,
@@ -204,7 +290,6 @@ header h1 {
 
 .swiper-wrapper-container {
     width: 100%;
-    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -494,7 +579,7 @@ header h1 {
 
 .popup {
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;

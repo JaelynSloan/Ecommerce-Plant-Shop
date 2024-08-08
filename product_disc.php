@@ -36,12 +36,12 @@ if (!$product) {
     <!-- HEADER -->
     <header>
         <div class="header">
-            <a href="index.html"><img src="images/logo.png" class="logo" /></a>
+            <a href="index.php"><img src="images/logo.png" class="logo" /></a>
             <h1>Jaelyn's Plant Shop</h1>
             <div>
                 <!--NAVBAR-->
                 <ul id="navbar">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
                     <li><a href="deals.html">Deals</a></li>
                     <li><a href="about.html">About</a></li>
