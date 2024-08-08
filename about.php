@@ -49,8 +49,8 @@ ob_end_flush();
                     <li><a href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
                     <li><a href="deals.php">Deals</a></li>
-                    <li><a href="about.php">About</a></li>
-                    <li><a class="active" href="contact.php">Contact Us</a></li>
+                    <li><a class="active" href="about.php">About</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                     <li>
                         <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                     </li>
@@ -81,51 +81,28 @@ ob_end_flush();
     <?php endif; ?>
 
 
-  <!-- CONTACT FORM -->
-  <section id="contact-form">
-    <form id="contactForm">
-      <span>Leave a Message</span>
-      <h2>We would love to hear from you!</h2>
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
-      <button type="submit" class="normal">Submit</button>
-      <div id="formMessage"></div>
-    </form>
-  </section>
-
-  <!-- CONTACT DETAILS -->
-  <section id="contact-details" class="section-p1">
-    <div class="details">
-      <h2>Visit our locations</h2>
-      <h3>Main Office</h3>
-      <div class="icon">
-        <li>
-          <i class="fa-regular fa-map"></i>
-          <p>123 Address Rd</p>
-        </li>
-        <li>
-          <i class="fa-regular fa-envelope"></i>
-          <p>
-            <a href="mailto:inquiries@jaelyn.io">inquiries@jaelyn.io</a>
-          </p>
-        </li>
-
-        <li>
-          <i class="fa-solid fa-phone"></i>
-          <p>123.456.7980</p>
-        </li>
-        <li>
-          <i class="fa-regular fa-clock"></i>
-          <p>10:00a - 10:00p Mon - Sat</p>
-        </li>
+  <!-- ABOUT US -->
+  <section id="aboutUs" class="section-m1">
+    <div class="about">
+      <img src="images/portrait.jpg" alt="" />
+      <div class="about-text">
+        <h2>About Our Company</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, ea
+          illo minus cumque aliquid commodi nulla consequatur voluptates
+          dolores sunt architecto dolore quod soluta adipisci nemo tempore
+          esse nihil unde corrupti! Blanditiis in quas, laborum consequuntur
+          quaerat hic earum tempore corporis iusto reprehenderit sapiente iure
+          reiciendis minima natus repellat alias!
+        </p>
+        <h2>How We Started</h2>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
+          sunt asperiores distinctio. Consequuntur illo, nulla rem aliquam nam
+          accusantium dolore. Officia rem explicabo ipsam eius totam autem
+          neque odio incidunt.
+        </p>
       </div>
-    </div>
-    <div class="map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2916.15261196383!2d-71.45422630958714!3d43.03822041757962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e24595182c672d%3A0x1af9c9f4bffd579e!2sSouthern%20New%20Hampshire%20University!5e0!3m2!1sen!2sus!4v1693631412177!5m2!1sen!2sus"
-        width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 
@@ -195,42 +172,6 @@ ob_end_flush();
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function ()
-    {
-      var form = document.getElementById("contactForm");
-      form.addEventListener("submit", handleFormSubmit);
-    });
-
-    function handleFormSubmit(event)
-    {
-      event.preventDefault(); // Prevent default form submission
-
-      var form = document.getElementById("contactForm");
-      var formData = new FormData(form);
-
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "submit_contact.php", true);
-      xhr.onload = function ()
-      {
-        var response = JSON.parse(xhr.responseText);
-        var msgElement = document.getElementById("formMessage");
-
-        if (xhr.status === 200 && response.success)
-        {
-          form.reset(); // Clear the form
-          msgElement.textContent = response.message;
-          msgElement.style.color = "green";
-        } else
-        {
-          msgElement.textContent = response.message;
-          msgElement.style.color = "red";
-        }
-      };
-      xhr.send(formData);
-    }
-  </script>
-
-<script>
         document.addEventListener("DOMContentLoaded", function() {
             var logoutPopup = document.getElementById("logoutPopup");
             var closePopup = document.getElementById("closePopupLogout");

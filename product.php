@@ -1,5 +1,6 @@
 <?php
 include 'database.php';
+include 'session_handler.php';
 
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -15,7 +16,22 @@ if (!$product) {
     echo "Product not found!";
     exit();
 }
+
+ob_start();
+
+
+$handler = new MySessionHandler($con);
+session_set_save_handler($handler, true);
+session_start();
+
+$isLoggedIn = isset($_SESSION['user_id']);
+echo '<!-- Debug Info: User ID: ' . ($_SESSION['user_id'] ?? 'Not set') . ' -->';
+
+$logoutMessage = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+
+ob_end_flush();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,23 +59,39 @@ if (!$product) {
             <div>
                 <!--NAVBAR-->
                 <ul id="navbar">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="deals.html">Deals</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a class="active" href="index.php">Home</a></li>
+                    <li><a href="shop.php">Shop</a></li>
+                    <li><a href="deals.php">Deals</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                     <li>
-                        <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                     </li>
-                    <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
+                    <li>
+                    <?php if ($isLoggedIn): ?>
+                    <a href="logout.php" class="sign_out">sign out</a>
+                <?php else: ?>
+                    <a href="login.html" class="sign_in">sign in</a>
+                <?php endif; ?>
+                    </li>
+                    <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
                 </ul>
             </div>
             <div id="mobile">
-                <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                 <i id="bar"><i class="fa-solid fa-bars"></i></i>
             </div>
         </div>
     </header>
+
+    <?php if ($logoutMessage): ?>
+        <div id="logoutPopup" class="popup">
+            <div class="popup-content">
+                <h1 id="popupMessage"><?php echo $logoutMessage; ?></h1>
+                <button id="closePopupLogout">Close</button>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <!-- PRODUCT DETAILS -->
     <main>
@@ -135,15 +167,15 @@ if (!$product) {
         </div>
         <div class="col">
             <h4>About</h4>
-            <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms & Conditions</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.php">Contact Us</a>
         </div>
         <div class="col">
             <h4>My Account</h4>
             <a href="login.html">Sign In</a>
-            <a href="cart.html">View Cart</a>
+            <a href="cart.php">View Cart</a>
             <a href="#">Help</a>
         </div>
         <div class="col install">
@@ -190,6 +222,30 @@ if (!$product) {
             imgCol.appendChild(img);
             smallImgs.appendChild(imgCol);
         }
+    </script>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var logoutPopup = document.getElementById("logoutPopup");
+            var closePopup = document.getElementById("closePopupLogout");
+
+            // Show the popup if there's a logout message
+            <?php if ($logoutMessage): ?>
+                logoutPopup.style.display = "block";
+            <?php endif; ?>
+
+            // Close the popup when the close button is clicked
+            closePopup.onclick = function() {
+                logoutPopup.style.display = "none";
+            };
+
+            // Close the popup if the user clicks anywhere outside the popup
+            window.onclick = function(event) {
+                if (event.target == logoutPopup) {
+                    logoutPopup.style.display = "none";
+                }
+            };
+        });
     </script>
 </body>
 

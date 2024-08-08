@@ -46,6 +46,7 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+
 }
 
 /* Navbar */
@@ -54,6 +55,7 @@ header {
     align-items: center;
     justify-content: center;
     margin-left: 80px;
+    min-width: 50%;
 }
 
 #navbar .active {
@@ -68,6 +70,9 @@ header h1 {
     color: #D0E7D2;
     font-size: 40px;
     font-variant: small-caps;
+    flex-shrink: 1;
+    /* Allow the title to shrink */
+
 }
 
 /* Navbar buttons */
@@ -82,14 +87,19 @@ header h1 {
 #navbar li {
     list-style: none;
     display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 20px;
+    padding: 10px 15px;
+    /* Adjust padding to allow closer spacing */
+    margin: 5px;
+    /* Reduce margin */
+    font-size: 18px;
+    /* Slightly smaller font size */
     font-weight: 500;
     cursor: pointer;
     position: relative;
     z-index: 2;
     transition: color 0.5s;
+    flex-shrink: 1;
+    /* Allow items to shrink as necessary */
 }
 
 #navbar li:hover a {
@@ -599,8 +609,9 @@ input[type="email"] {
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888888;
-    width: 40%;
-    font-weight: bolder;
+    min-width: 400px;
+    max-width: 500px;
+    font-weight: bold;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -609,6 +620,7 @@ input[type="email"] {
 
 
 #popupMessage {
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
@@ -981,10 +993,7 @@ footer .copyright {
 #contact-form {
     display: flex;
     align-items: center;
-    margin: 30px;
-    border: 1px solid #b0b0b0;
-    border-radius: 10px;
-    background-color: #B0D9B1;
+    background-color: #f4f4f4;
 }
 
 #contact-form form {

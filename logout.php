@@ -23,7 +23,7 @@ session_destroy();
 // Debugging: Output the session variables after destroying
 error_log('After logout - User ID: ' . ($_SESSION['user_id'] ?? 'Not set'));
 
-// Redirect to the homepage with a logout message
-header("Location: index.php?message=Successfully logged out");
+$previousPage = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+header("Location: $previousPage?message=Successfully logged out");
 exit();
 ?>

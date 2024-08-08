@@ -28,12 +28,12 @@
         <!--NAVBAR-->
         <ul id="navbar">
           <li><a class="active" href="index.php">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="deals.html">Deals</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="shop.php">Shop</a></li>
+          <li><a href="deals.php">Deals</a></li>
+          <li><a href="about.php">About</a></li>
+          <li><a href="contact.php">Contact Us</a></li>
           <li>
-            <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+            <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
           </li>
           <li>
             <a href="login.html" class="sign_in">sign in</a>
@@ -42,7 +42,7 @@
         </ul>
       </div>
       <div id="mobile">
-        <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
         <i id="bar"><i class="fa-solid fa-bars"></i></i>
       </div>
     </div>
@@ -51,6 +51,8 @@
   <main>
     <div class="container">
       <div class="form-container">
+        <p id="error-message" class="error-message" style="display: none;"></p>
+        <p id="success-message" class="success-message" style="display: none;"></p>
         <form id="login-form" action="login.php" method="POST">
           <h2>Login</h2>
           <input type="text" name="username" placeholder="Username" required>
@@ -67,11 +69,10 @@
           <button class="normal" type="submit">Register</button>
           <p>Already have an account? <a href="#" onclick="toggleForm()">Login here</a></p>
         </form>
-        <p id="error-message" class="error-message" style="display: none;"></p>
-        <p id="success-message" class="success-message" style="display: none;"></p>
       </div>
     </div>
   </main>
+
   <script>
     // Check if there's an error or success message in the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -145,15 +146,15 @@
     </div>
     <div class="col">
       <h4>About</h4>
-      <a href="about.html">About Us</a>
+      <a href="about.php">About Us</a>
       <a href="#">Privacy Policy</a>
       <a href="#">Terms & Conditions</a>
-      <a href="contact.html">Contact Us</a>
+      <a href="contact.php">Contact Us</a>
     </div>
     <div class="col">
       <h4>My Account</h4>
       <a href="login.html">Sign In</a>
-      <a href="cart.html">View Cart</a>
+      <a href="cart.php">View Cart</a>
       <a href="#">Help</a>
     </div>
     <div class="col install">

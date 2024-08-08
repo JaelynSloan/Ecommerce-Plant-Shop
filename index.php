@@ -38,46 +38,46 @@ ob_end_flush();
 
 <body>
     <!----HEADER----->
-<header>
-    <div class="header">
-        <a href="index.html"><img src="images/logo.png" class="logo" /></a>
-        <h1>Jaelyn's Plant Shop</h1>
-        <div>
-            <!--NAVBAR-->
-            <ul id="navbar">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="deals.html">Deals</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li>
-                    <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
-                </li>
-                <li>
-                <?php if ($isLoggedIn): ?>
-                <a href="logout.php" class="sign_out">sign out</a>
-            <?php else: ?>
-                <a href="login.html" class="sign_in">sign in</a>
-            <?php endif; ?>
-                </li>
-                <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
-            </ul>
+    <header>
+        <div class="header">
+            <a href="index.php"><img src="images/logo.png" class="logo" /></a>
+            <h1>Jaelyn's Plant Shop</h1>
+            <div>
+                <!--NAVBAR-->
+                <ul id="navbar">
+                    <li><a class="active" href="index.php">Home</a></li>
+                    <li><a href="shop.php">Shop</a></li>
+                    <li><a href="deals.php">Deals</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
+                    <li>
+                        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                    </li>
+                    <li>
+                    <?php if ($isLoggedIn): ?>
+                    <a href="logout.php" class="sign_out">sign out</a>
+                <?php else: ?>
+                    <a href="login.html" class="sign_in">sign in</a>
+                <?php endif; ?>
+                    </li>
+                    <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
+                </ul>
+            </div>
+            <div id="mobile">
+                <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                <i id="bar"><i class="fa-solid fa-bars"></i></i>
+            </div>
         </div>
-        <div id="mobile">
-            <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
-            <i id="bar"><i class="fa-solid fa-bars"></i></i>
-        </div>
-    </div>
-</header>
+    </header>
 
-<?php if ($logoutMessage): ?>
-    <div id="logoutPopup" class="popup">
-        <div class="popup-content">
-            <p><?php echo $logoutMessage; ?></p>
-            <button id="closePopupLogout">Close</button>
+    <?php if ($logoutMessage): ?>
+        <div id="logoutPopup" class="popup">
+            <div class="popup-content">
+                <h1 id="popupMessage"><?php echo $logoutMessage; ?></h1>
+                <button id="closePopupLogout">Close</button>
+            </div>
         </div>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
 
 
 
@@ -89,8 +89,8 @@ ob_end_flush();
                     space. Whether you're a seasoned gardener or just starting your plant journey, we have the perfect
                     greenery for you. From everyday favorites to exclusive deals, your next plant companion awaits.
                     Let's grow together!</p>
-                <a href="deals.html">shop deals</a>
-                <a href="shop.html">shop all</a>
+                <a href="deals.php">shop deals</a>
+                <a href="shop.php">shop all</a>
             </div>
             <div class="home-img img-opacity">
                 <div class="overlay"></div>
@@ -190,15 +190,15 @@ ob_end_flush();
         </div>
         <div class="col">
             <h4>About</h4>
-            <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms & Conditions</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.php">Contact Us</a>
         </div>
         <div class="col">
             <h4>My Account</h4>
             <a href="login.html">Sign In</a>
-            <a href="cart.html">View Cart</a>
+            <a href="cart.php">View Cart</a>
             <a href="#">Help</a>
         </div>
         <div class="col install">

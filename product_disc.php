@@ -42,18 +42,18 @@ if (!$product) {
                 <!--NAVBAR-->
                 <ul id="navbar">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="deals.html">Deals</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shop.php">Shop</a></li>
+                    <li><a href="deals.php">Deals</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                     <li>
-                        <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                     </li>
                     <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
                 </ul>
             </div>
             <div id="mobile">
-                <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                 <i id="bar"><i class="fa-solid fa-bars"></i></i>
             </div>
         </div>
@@ -146,15 +146,15 @@ if (!$product) {
         </div>
         <div class="col">
             <h4>About</h4>
-            <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms & Conditions</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.php">Contact Us</a>
         </div>
         <div class="col">
             <h4>My Account</h4>
             <a href="login.html">Sign In</a>
-            <a href="cart.html">View Cart</a>
+            <a href="cart.php">View Cart</a>
             <a href="#">Help</a>
         </div>
         <div class="col install">
