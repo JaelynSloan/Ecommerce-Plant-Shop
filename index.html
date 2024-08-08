@@ -34,6 +34,9 @@
                     <li>
                         <a href="cart.html" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                     </li>
+                    <li>
+                        <a href="login.html" class="sign_in">sign in</a>
+                    </li>
                     <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
                 </ul>
             </div>
@@ -49,28 +52,41 @@
     <main>
         <section class="home-container">
             <div class="home-txt">
-                <h3 class="head-txt">Expertly Grown Indoor and Outdoor Plants</h3>
+                <h1 class="head-txt">Unleash the beauty of nature in your home today! </h1>
+                <p>Welcome to our green oasis! Discover a world of lush, vibrant plants that bring life and joy to any
+                    space. Whether you're a seasoned gardener or just starting your plant journey, we have the perfect
+                    greenery for you. From everyday favorites to exclusive deals, your next plant companion awaits.
+                    Let's grow together!</p>
                 <a href="deals.html">shop deals</a>
                 <a href="shop.html">shop all</a>
             </div>
-            <div class="swiper-wrapper-container">
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" onclick="window.location.href='product.php?id=4'">
-                            <img src="images/Slides/succulent-s1.jpg" alt="image of succulent in pot" />
-                        </div>
-                        <div class="swiper-slide" onclick="window.location.href='product.php?id=5'">
-                            <img src="images/Slides/flower-s2.jpg" alt="image of flowers" />
-                        </div>
-                        <div class="swiper-slide" onclick="window.location.href='product.php?id=11'">
-                            <img src="images/Slides/bouquet-s3.jpg" alt="image of flower bouquet" />
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+            <div class="home-img img-opacity">
+                <div class="overlay"></div>
+                <div class="swiper-txt">
+                    <h4>Bring nature home with our stunning collection of plants!</h4>
+                    <p>Shop from our diverse collection of beautiful flowers, succulents, cacti, and more to find the
+                        perfect addition to your home.
+                    </p>
                 </div>
 
+                <div class="swiper-wrapper-container">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" onclick="window.location.href='product.php?id=4'">
+                                <img src="images/Slides/succulent-s1.jpg" alt="image of succulent in pot" />
+                            </div>
+                            <div class="swiper-slide" onclick="window.location.href='product.php?id=5'">
+                                <img src="images/Slides/flower-s2.jpg" alt="image of flowers" />
+                            </div>
+                            <div class="swiper-slide" onclick="window.location.href='product.php?id=11'">
+                                <img src="images/Slides/bouquet-s3.jpg" alt="image of flower bouquet" />
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
             </div>
 
         </section>
@@ -78,7 +94,7 @@
         <!-- NEW ARRIVALS -->
         <section id="product1" class="section-p1">
             <h2>New Arrivals</h2>
-            <div id="product-container" class="pro-container"></div>
+            <div id="product-container-home" class="pro-container-home"></div>
         </section>
 
     </main>

@@ -52,6 +52,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 80px;
 }
 
 #navbar .active {
@@ -95,6 +96,9 @@ header h1 {
 
 }
 
+.sign_in {
+    font-size: 16px;
+}
 
 #mobile {
     display: none;
@@ -110,51 +114,39 @@ header h1 {
 .home-container {
     width: 100%;
     margin: auto;
-    background-image: url("images/background.jpg");
-    height: 90vh;
-    background-position: top 25% right 0;
-    background-size: cover;
-    padding: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Evenly space items from the sides */
 }
-
 
 .home-txt {
-    color: white;
-    padding: 20px;
     text-align: center;
-    background: rgba(97, 130, 100, .8);
-    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
-    border-radius: 25px;
-    max-width: 400px;
-    margin-right: 20px;
+    max-width: 600px;
     margin: 0 auto;
-
 }
 
-.home-txt h3 {
-    font-size: 28px !important;
-    padding: 15px;
+.home-txt h1 {
+    color: #000000;
+    font-size: 50px;
+    padding-bottom: 30px;
     text-align: center;
-    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
+    font-weight: 500;
+}
+
+.home-txt p {
+    font-size: 24px;
+    padding-bottom: 30px;
 }
 
 .home-txt a {
     display: block;
-    color: #fff;
+    color: black;
     font-weight: bold;
-    background: rgba(176, 217, 177, .5);
-    border: 2px solid #D0E7D2;
-    border-color: #4c654e;
-    border-radius: 10px;
-    padding: 8px;
+    font-size: 24px;
     text-decoration: none;
-    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
-    font-size: 20px;
     margin: 20px auto;
+    min-width: 150px;
+    max-width: 200px;
     transition: transform 0.5s, opacity 0.5s;
 }
 
@@ -163,17 +155,64 @@ header h1 {
 }
 
 /* Slideshow */
+.home-img {
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    padding: 80px 100px;
+    margin: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.img-opacity .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(208, 231, 210, 0.5);
+    z-index: 1;
+}
+
+.swiper-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.swiper-txt h4 {
+    padding-bottom: 10px;
+    font-size: 36px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.swiper-txt p {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.swiper-txt,
+.swiper-wrapper-container {
+    position: relative;
+    z-index: 2;
+}
+
 .swiper-wrapper-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 .swiper {
     width: 100%;
-    height: 80vh;
+    height: 60vh;
     position: relative;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -193,7 +232,7 @@ header h1 {
 
 .swiper .swiper-button-prev,
 .swiper .swiper-button-next {
-    color: #fff;
+    color: #618264;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -242,40 +281,69 @@ header h1 {
     /*background-image: url(images/background2.jpg);
     background-position: top 25% right 0;
     background-size: cover;*/
-    background-color: #a0b4a2;
+    background-color: #ffffff;
+}
+
+#product1 .pro-container-home {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+/* Customize the horizontal scrollbar */
+#product1 .pro-container-home::-webkit-scrollbar {
+    height: 8px;
+    /* Height of the horizontal scrollbar */
+}
+
+#product1 .pro-container-home::-webkit-scrollbar-track {
+    background: transparent;
+    /* Transparent background for the track */
+}
+
+#product1 .pro-container-home::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Thumb color with some transparency */
+    border-radius: 10px;
+    /* Rounded corners for the thumb */
+}
+
+#product1 .pro-container-home::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darker thumb color on hover */
 }
 
 #product1 .pro-container {
     display: flex;
-    justify-content: space-between;
     padding-top: 10px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #product1 h2 {
-    color: white;
+    color: #000000;
     font-size: 40px;
     font-variant: small-caps;
-    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
 }
 
 #product1 .pro {
-    width: 20%;
+    max-width: 250px;
     min-width: 250px;
     padding: 10px 12px;
-    background-color: #e8e8e8;
-    border: 2px solid #b0b0b0;
-    border-radius: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
     cursor: pointer;
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
-    margin: 30px 30px;
+    margin: 5px 5px;
     transition: 0.2s ease;
     position: relative;
     height: 350px;
 }
 
 #product1 .pro:hover {
-    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 #product1 .pro img {
@@ -292,10 +360,11 @@ header h1 {
     padding: 10px 0;
 }
 
-#product1 .pro .description h3 {
+#product1 .pro .description .prod-name {
     padding-top: 7px;
     color: black;
     font-size: 20px;
+    font-weight: 700;
 }
 
 #product1 .pro .description i {
@@ -303,13 +372,13 @@ header h1 {
     color: rgb(243, 181, 25);
 }
 
-#product1 .pro .description h4 {
+#product1 .pro .description .prod-price {
     padding-top: 7px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
 }
 
-#product1 .pro .description h4 s {
+#product1 .pro .description .prod-price s {
     color: red;
 }
 
@@ -317,8 +386,6 @@ header h1 {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    border-radius: 50px;
-    background-color: #b0b0b0;
     font-weight: 500;
     color: black;
     position: absolute;
@@ -328,7 +395,7 @@ header h1 {
 }
 
 #product1 .pro .cart:hover {
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .star {

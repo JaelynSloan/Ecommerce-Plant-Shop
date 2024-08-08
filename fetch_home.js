@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function ()
         console.error(products.error);
         return;
       }
-      const productContainer = document.getElementById('product-container');
+      const productContainer = document.getElementById('product-container-home');
       // Display only the first 8 products
       const firstEightProducts = products.slice(0, 8);
       productContainer.innerHTML = firstEightProducts.map(product =>
@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", function ()
       <div class="pro" onclick="window.location.href='product.php?id=${product.id}'">
         <img src="${product.image_url}" alt="${product.name}" />
         <div class="description">
-          <h3>${product.name}</h3>
+          <p class="prod-name">${product.name}</p>
           <div class="star">${stars}</div>
-          <h4>$${price.toFixed(2)}</h4>
+          <p class="prod-price">$${price.toFixed(2)}</p>
         </div>
         <a href="#" class="cart"><i class="fa-solid fa-cart-arrow-down"></i></a>
       </div>
