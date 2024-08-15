@@ -14,9 +14,17 @@ document.addEventListener("DOMContentLoaded", function ()
                     console.error(product.error);
                     return;
                 }
-                document.getElementById('productName').innerText = product.name;
-                document.getElementById('productPrice').innerText = `$${parseFloat(product.price).toFixed(2)}`;
-                document.getElementById('productDescription').innerText = product.description;
+
+                const productNameElem = document.getElementById('productName');
+                const productPriceElem = document.getElementById('regularPrice');
+                const discountPriceElem = document.getElementById('discountPrice');
+                const productDescriptionElem = document.getElementById('productDescription');
+
+                if (productNameElem) productNameElem.innerText = product.name;
+                if (productPriceElem) productPriceElem.innerText = `$${parseFloat(product.price).toFixed(2)}`;
+                if (discountPriceElem) discountPriceElem.innerText = `$${parseFloat(product.discount_price).toFixed(2)}`;
+                if (productDescriptionElem) productDescriptionElem.innerText = product.description;
+
                 setMainImage(product.image_url);
 
                 const allImages = [product.image_url, ...product.additional_images];
@@ -24,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function ()
             })
             .catch(error => console.error('Error fetching product details:', error));
     }
-
     const addToCartButton = document.getElementById('addToCartButton');
 
     if (addToCartButton)
@@ -70,12 +77,35 @@ document.addEventListener("DOMContentLoaded", function ()
             })
             .catch(error => console.error('Error:', error));
     }
+
+    // Display related products
+    const relatedProductsContainer = document.getElementById('product-container-related');
+    if (relatedProductsContainer && relatedProducts.length > 0)
+    {
+        relatedProducts.forEach(product =>
+        {
+            const productElement = document.createElement('div');
+            productElement.classList.add('pro');
+
+            productElement.innerHTML = `
+                <img src="${product.image_url}" alt="${product.name}">
+                <h5>${product.name}</h5>
+                <h4>$${parseFloat(product.price).toFixed(2)}</h4>
+                <a href="product_disc.php?id=${product.product_id}">View Product</a>
+            `;
+
+            relatedProductsContainer.appendChild(productElement);
+        });
+    }
 });
 
 function setMainImage(src)
 {
     const mainImg = document.getElementById("mainImg");
-    mainImg.src = src;
+    if (mainImg)
+    {
+        mainImg.src = src;
+    }
 }
 
 function addSmallImage(src)
@@ -83,17 +113,20 @@ function addSmallImage(src)
     if (src)
     {  // Ensure src is valid
         const smallImgs = document.getElementById("smallImgs");
-        const imgCol = document.createElement('div');
-        imgCol.classList.add('small-img-col');
-        const img = document.createElement('img');
-        img.src = src;
-        img.width = 100;
-        img.classList.add('small-img');
-        img.onclick = function ()
+        if (smallImgs)
         {
-            setMainImage(src);
-        };
-        imgCol.appendChild(img);
-        smallImgs.appendChild(imgCol);
+            const imgCol = document.createElement('div');
+            imgCol.classList.add('small-img-col');
+            const img = document.createElement('img');
+            img.src = src;
+            img.width = 100;
+            img.classList.add('small-img');
+            img.onclick = function ()
+            {
+                setMainImage(src);
+            };
+            imgCol.appendChild(img);
+            smallImgs.appendChild(imgCol);
+        }
     }
 }

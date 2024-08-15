@@ -1,9 +1,15 @@
 <?php
 include 'database.php';
+include 'session_handler.php';
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$sql = "SELECT * FROM products WHERE id = ?";
+$sql = "SELECT * FROM products WHERE product_id = ?";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("i", $product_id);
 $stmt->execute();
@@ -15,15 +21,54 @@ if (!$product) {
     echo "Product not found!";
     exit();
 }
+
+ob_start();
+
+
+$handler = new MySessionHandler($con);
+session_set_save_handler($handler, true);
+session_start();
+
+$isLoggedIn = isset($_SESSION['user_id']);
+echo '<!-- Debug Info: User ID: ' . ($_SESSION['user_id'] ?? 'Not set') . ' -->';
+
+$logoutMessage = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+
+$cartCount = 0;
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE user_id = ?)");
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    $sessionId = session_id();
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE session_id = ?)");
+    $stmt->bind_param('s', $sessionId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+}
+
+$cartCount = $cartCount ? $cartCount : 0;
+
+ob_end_flush();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo htmlspecialchars($product['name']); ?></title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script src="cart_count.js"></script>
     <script src="https://kit.fontawesome.com/3e4d0c6727.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,6 +77,7 @@ if (!$product) {
         rel="stylesheet" />
     <script src="product_disc.js" defer></script>
 </head>
+
 <body>
     <!-- HEADER -->
     <header>
@@ -41,15 +87,25 @@ if (!$product) {
             <div>
                 <!--NAVBAR-->
                 <ul id="navbar">
-                    <li><a href="index.php">Home</a></li>
+                    <li><a class="active" href="index.php">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
                     <li><a href="deals.php">Deals</a></li>
                     <li><a href="about.php">About</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
                     <li>
-                        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                        <a href="cart.php" id="cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <span id="cart-count"><?php echo $cartCount; ?></span>
+                        </a>
                     </li>
-                    <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
+                    <li>
+                    <?php if ($isLoggedIn): ?>
+                    <a href="logout.php" class="sign_out">sign out</a>
+                <?php else: ?>
+                    <a href="login.html" class="sign_in">sign in</a>
+                <?php endif; ?>
+                    </li>
+                    <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
                 </ul>
             </div>
             <div id="mobile">
@@ -59,44 +115,47 @@ if (!$product) {
         </div>
     </header>
 
+    <?php if ($logoutMessage): ?>
+        <div id="logoutPopup" class="popup">
+            <div class="popup-content">
+                <h1 id="popupMessage"><?php echo $logoutMessage; ?></h1>
+                <button id="closePopupLogout">Close</button>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- PRODUCT DETAILS -->
     <main>
-        <section id="prodetails" class="section-p1">
-            <div class="pro-img">
-                <img id="mainImg" src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100%">
-                <div class="small-img-group" id="smallImgs">
-                    <?php
-                    $small_images = [
-                        $product['image2_url'],
-                        $product['image3_url'],
-                        $product['image4_url'],
-                        $product['image5_url5']
-                    ];
-
-                    foreach ($small_images as $image) {
-                        if (!empty($image)) {
-                            echo '<div class="small-img-col">
-                                    <img src="' . htmlspecialchars($image) . '" width="100" class="small-img" />
-                                  </div>';
-                        }
-                    }
-                    ?>
-                </div>
+    <section id="prodetails" class="section-p1">
+        <div class="pro-img">
+            <img id="mainImg" src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100%">
+            <div class="small-img-group" id="smallImgs">
             </div>
-            <div class="pro-details">
-                <button class="normal" onclick="history.back()">Back</button>
-                <h4 id="productName"><?php echo htmlspecialchars($product['name']); ?></h4>
-                <div id="priceContainer">
+        </div>
+        <div class="pro-details">
+            <button class="normal" onclick="history.back()">Back</button>
+            <h4 id="productName"><?php echo htmlspecialchars($product['name']); ?></h4>
+            
+            <div id="priceContainer">
                     <h2 id="regularPrice">$<?php echo number_format($product['price'], 2); ?></h2> 
                     <h2 id="discountPrice">$<?php echo number_format($product['discount_price'], 2); ?></h2>
                 </div>
-                <input type="number" value="1">
-                <button class="normal">Add to Cart</button>
-                <br></br>
-                <span id="productDescription"><?php echo nl2br(htmlspecialchars($product['description'])); ?></span>
-            </div>
-        </section>
-    </main>
+
+            <input type="number" value="1">
+            <button class="normal" id="addToCartButton" data-id="<?php echo $product['product_id']; ?>">Add to Cart</button>
+            <br></br>
+            <span id="productDescription"><?php echo nl2br(htmlspecialchars($product['description'])); ?></span>
+        </div>
+    </section>
+
+</main>
+
+
+    
+
+
+    <!-- RELATED ITEMS -->
+
 
     <!--NEWSLETTER-->
     <section id="newsletter" class="section-p1">
@@ -105,7 +164,7 @@ if (!$product) {
             <p>Get email updates and <span>special offers</span> daily, weekly, or monthly!</p>
         </div>
         <div class="form">
-            <input type="text" id="emailInput" placeholder="Your Email Address">
+            <input type="email" id="emailInput" placeholder="Your Email Address" required>
             <button id="signUp" class="normal">Sign Up</button>
             <div id="popup" class="popup">
                 <div class="popup-content">
@@ -175,23 +234,29 @@ if (!$product) {
             <p>&copy; 2023, Jaelyn Sloan - Ecommerce Website</p>
         </div>
     </footer>
+
     <script>
-        // Handle main and small images display
-        var mainImg = document.getElementById("mainImg");
-        var smallImgs = document.getElementById("smallImgs");
+        document.addEventListener("DOMContentLoaded", function() {
+            var logoutPopup = document.getElementById("logoutPopup");
+            var closePopup = document.getElementById("closePopupLogout");
 
-        function setMainImage(src) {
-            mainImg.src = src;
-        }
+            <?php if ($logoutMessage): ?>
+                logoutPopup.style.display = "block";
+            <?php endif; ?>
 
-        // Add event listener to each small image
-        document.querySelectorAll('.small-img').forEach(function(img) {
-            img.addEventListener('click', function() {
-                setMainImage(this.src);
-            });
+            closePopup.onclick = function() {
+                logoutPopup.style.display = "none";
+            };
+
+            window.onclick = function(event) {
+                if (event.target == logoutPopup) {
+                    logoutPopup.style.display = "none";
+                }
+            };
         });
     </script>
 </body>
+
 </html>
 
 <?php

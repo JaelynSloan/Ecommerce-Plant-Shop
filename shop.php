@@ -14,6 +14,28 @@ echo '<!-- Debug Info: User ID: ' . ($_SESSION['user_id'] ?? 'Not set') . ' -->'
 
 $logoutMessage = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
+$cartCount = 0;
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE user_id = ?)");
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    $sessionId = session_id();
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE session_id = ?)");
+    $stmt->bind_param('s', $sessionId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+}
+
+$cartCount = $cartCount ? $cartCount : 0;
+
+
 ob_end_flush();
 ?>
 
@@ -26,6 +48,8 @@ ob_end_flush();
   <title>Jaelyn's Plant Shop</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+  <script src="fetch_products.js"></script>
+  <script src="cart_count.js"></script>
   <script src="https://kit.fontawesome.com/3e4d0c6727.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,7 +74,10 @@ ob_end_flush();
                 <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
                 <li>
-                    <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                    <a href="cart.php" id="cart">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <span id="cart-count"><?php echo $cartCount; ?></span>
+                    </a>
                 </li>
                 <li>
                 <?php if ($isLoggedIn): ?>
@@ -59,11 +86,10 @@ ob_end_flush();
                 <a href="login.html" class="sign_in">sign in</a>
             <?php endif; ?>
                 </li>
-                <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
             </ul>
         </div>
         <div id="mobile">
-            <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
             <i id="bar"><i class="fa-solid fa-bars"></i></i>
         </div>
       </div>
@@ -82,7 +108,7 @@ ob_end_flush();
     <!--PRODUCTS-->
     <section id="product1" class="section-p1">
       <h2>All Products</h2>
-      <div id="product-container" class="pro-container"></div>
+        <div id="product-container" class="pro-container"></div>
     </section>
 
     <section id="pagination" class="section-p1">
@@ -94,21 +120,21 @@ ob_end_flush();
 
   <!--NEWSLETTER-->
   <section id="newsletter" class="section-p1">
-    <div class="newstext">
-      <h4>Sign Up For Our Newsletter</h4>
-      <p>Get email updates and <span>special offers</span> daily, weekly, or monthly!</p>
-    </div>
-    <div class="form">
-      <input type="text" id="emailInput" placeholder="Your Email Address">
-      <button id="signUp" class="normal">Sign Up</button>
-      <div id="popup" class="popup">
-        <div class="popup-content">
-          <h1 id="popupMessage">You Have Successfully Been Signed Up!</h1>
-          <button id="closePopup">Close</button>
+        <div class="newstext">
+            <h4>Sign Up For Our Newsletter</h4>
+            <p>Get email updates and <span>special offers</span> daily, weekly, or monthly!</p>
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="form">
+            <input type="email" id="emailInput" placeholder="Your Email Address" required>
+            <button id="signUp" class="normal">Sign Up</button>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <h1 id="popupMessage">You Have Successfully Been Signed Up!</h1>
+                    <button id="closePopup">Close</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
   <!--FOOTER-->
   <footer class="section-p1">
@@ -158,31 +184,26 @@ ob_end_flush();
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var logoutPopup = document.getElementById("logoutPopup");
-        var closePopup = document.getElementById("closePopupLogout");
+        document.addEventListener("DOMContentLoaded", function() {
+            var logoutPopup = document.getElementById("logoutPopup");
+            var closePopup = document.getElementById("closePopupLogout");
 
-        // Show the popup if there's a logout message
-        <?php if ($logoutMessage): ?>
-            logoutPopup.style.display = "block";
-        <?php endif; ?>
+            <?php if ($logoutMessage): ?>
+                logoutPopup.style.display = "block";
+            <?php endif; ?>
 
-        // Close the popup when the close button is clicked
-        closePopup.onclick = function() {
-            logoutPopup.style.display = "none";
-        };
-
-        // Close the popup if the user clicks anywhere outside the popup
-        window.onclick = function(event) {
-            if (event.target == logoutPopup) {
+            closePopup.onclick = function() {
                 logoutPopup.style.display = "none";
-            }
-        };
-    });
-  </script>
-  <script src="script.js"></script>
+            };
 
-  <script src="fetch_products.js"></script>
+            window.onclick = function(event) {
+                if (event.target == logoutPopup) {
+                    logoutPopup.style.display = "none";
+                }
+            };
+        });
+    </script>
+
 </body>
 
 </html>

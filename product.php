@@ -4,7 +4,7 @@ include 'session_handler.php';
 
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$sql = "SELECT * FROM products WHERE id = ?";
+$sql = "SELECT * FROM products WHERE product_id = ?";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("i", $product_id);
 $stmt->execute();
@@ -29,6 +29,27 @@ echo '<!-- Debug Info: User ID: ' . ($_SESSION['user_id'] ?? 'Not set') . ' -->'
 
 $logoutMessage = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
+$cartCount = 0;
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE user_id = ?)");
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    $sessionId = session_id();
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE session_id = ?)");
+    $stmt->bind_param('s', $sessionId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+}
+
+$cartCount = $cartCount ? $cartCount : 0;
+
 ob_end_flush();
 ?>
 
@@ -41,6 +62,8 @@ ob_end_flush();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo htmlspecialchars($product['name']); ?></title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script src="cart_count.js"></script>
     <script src="https://kit.fontawesome.com/3e4d0c6727.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,7 +88,10 @@ ob_end_flush();
                     <li><a href="about.php">About</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
                     <li>
-                        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
+                        <a href="cart.php" id="cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <span id="cart-count"><?php echo $cartCount; ?></span>
+                        </a>
                     </li>
                     <li>
                     <?php if ($isLoggedIn): ?>
@@ -74,11 +100,10 @@ ob_end_flush();
                     <a href="login.html" class="sign_in">sign in</a>
                 <?php endif; ?>
                     </li>
-                    <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
+                    <a id="close"><i class="fa-solid fa-xmark"></i></a>
                 </ul>
             </div>
             <div id="mobile">
-                <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
                 <i id="bar"><i class="fa-solid fa-bars"></i></i>
             </div>
         </div>
@@ -96,19 +121,22 @@ ob_end_flush();
     <!-- PRODUCT DETAILS -->
     <main>
     <section id="prodetails" class="section-p1">
+    <button class="normal" onclick="history.back()">Back</button>
+    <div class="prod-container">
         <div class="pro-img">
             <img id="mainImg" src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100%">
             <div class="small-img-group" id="smallImgs">
             </div>
         </div>
         <div class="pro-details">
-            <button class="normal" onclick="history.back()">Back</button>
+            
             <h4 id="productName"><?php echo htmlspecialchars($product['name']); ?></h4>
             <h2 id="productPrice">$<?php echo number_format($product['price'], 2); ?></h2>
             <input type="number" value="1">
-            <button class="normal">Add to Cart</button>
+            <button class="normal" id="addToCartButton" data-id="<?php echo $product['product_id']; ?>">Add to Cart</button>
             <br></br>
             <span id="productDescription"><?php echo nl2br(htmlspecialchars($product['description'])); ?></span>
+        </div>
         </div>
     </section>
 </main>
@@ -126,7 +154,7 @@ ob_end_flush();
             <p>Get email updates and <span>special offers</span> daily, weekly, or monthly!</p>
         </div>
         <div class="form">
-            <input type="text" id="emailInput" placeholder="Your Email Address">
+            <input type="email" id="emailInput" placeholder="Your Email Address" required>
             <button id="signUp" class="normal">Sign Up</button>
             <div id="popup" class="popup">
                 <div class="popup-content">
@@ -198,48 +226,18 @@ ob_end_flush();
     </footer>
 
     <script>
-        // Handle main and small images display
-        var mainImg = document.getElementById("mainImg");
-        var smallImgs = document.getElementById("smallImgs");
-
-        function setMainImage(src)
-        {
-            mainImg.src = src;
-        }
-
-        function addSmallImage(src)
-        {
-            var imgCol = document.createElement('div');
-            imgCol.classList.add('small-img-col');
-            var img = document.createElement('img');
-            img.src = src;
-            img.width = 100;
-            img.classList.add('small-img');
-            img.onclick = function ()
-            {
-                setMainImage(src);
-            };
-            imgCol.appendChild(img);
-            smallImgs.appendChild(imgCol);
-        }
-    </script>
-
-<script>
         document.addEventListener("DOMContentLoaded", function() {
             var logoutPopup = document.getElementById("logoutPopup");
             var closePopup = document.getElementById("closePopupLogout");
 
-            // Show the popup if there's a logout message
             <?php if ($logoutMessage): ?>
                 logoutPopup.style.display = "block";
             <?php endif; ?>
 
-            // Close the popup when the close button is clicked
             closePopup.onclick = function() {
                 logoutPopup.style.display = "none";
             };
 
-            // Close the popup if the user clicks anywhere outside the popup
             window.onclick = function(event) {
                 if (event.target == logoutPopup) {
                     logoutPopup.style.display = "none";

@@ -49,6 +49,23 @@ document.addEventListener("DOMContentLoaded", function ()
   });
 
 
+  // Mobile Navbar 
+  var barIcon = document.getElementById("bar");
+  var navbar = document.getElementById("navbar");
+  var closeButton = document.getElementById("close");
+
+  barIcon.addEventListener("click", function ()
+  {
+    navbar.classList.toggle("show");
+    closeButton.style.display = "block";
+  });
+
+  closeButton.addEventListener("click", function ()
+  {
+    navbar.classList.remove("show");
+    closeButton.style.display = "none";
+  });
+
 
   // // Drag-able scroll bar
   // const container = document.querySelector('#product1 .pro-container-home');

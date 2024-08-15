@@ -66,6 +66,7 @@
           <input type="text" name="username" placeholder="Username" required>
           <input type="email" name="email" placeholder="Email" required>
           <input type="password" name="password" placeholder="Password" required>
+          <input type="password" name="passwordMatch" placeholder="Re-Type Password" required>
           <button class="normal" type="submit">Register</button>
           <p>Already have an account? <a href="#" onclick="toggleForm()">Login here</a></p>
         </form>
@@ -114,7 +115,6 @@
       </div>
     </div>
   </section>
-
 
   <!--FOOTER-->
   <footer class="section-p1">
@@ -175,6 +175,31 @@
       <p>&copy; 2023, Jaelyn Sloan - Ecommerce Website</p>
     </div>
   </footer>
+
+  <!-- <script>   TO DO!!!
+    document.addEventListener("DOMContentLoaded", function ()
+    {
+      var logoutPopup = document.getElementById("logoutPopup");
+      var closePopup = document.getElementById("closePopupLogout");
+
+        <? php if ($logoutMessage): ?>
+        logoutPopup.style.display = "block";
+        <? php endif; ?>
+
+        closePopup.onclick = function()
+        {
+          logoutPopup.style.display = "none";
+        };
+
+      window.onclick = function (event)
+      {
+        if (event.target == logoutPopup)
+        {
+          logoutPopup.style.display = "none";
+        }
+      };
+    });
+  </script> -->
 
   <script src="login_script.js"></script>
 </body>

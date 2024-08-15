@@ -1,5 +1,4 @@
 <?php
-// Start output buffering
 ob_start();
 
 include 'database.php'; 
@@ -14,6 +13,27 @@ echo '<!-- Debug Info: User ID: ' . ($_SESSION['user_id'] ?? 'Not set') . ' -->'
 
 $logoutMessage = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
+$cartCount = 0;
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE user_id = ?)");
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    $sessionId = session_id();
+    $stmt = $con->prepare("SELECT SUM(quantity) FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE session_id = ?)");
+    $stmt->bind_param('s', $sessionId);
+    $stmt->execute();
+    $stmt->bind_result($cartCount);
+    $stmt->fetch();
+    $stmt->close();
+}
+
+$cartCount = $cartCount ? $cartCount : 0;
+
 ob_end_flush();
 ?>
 
@@ -25,6 +45,9 @@ ob_end_flush();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jaelyn's Plant Shop</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script src="fetch_home.js"></script>
+    <script src="cart_count.js"></script>
     <script src="https://kit.fontawesome.com/3e4d0c6727.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,36 +62,49 @@ ob_end_flush();
 <body>
     <!----HEADER----->
     <header>
-        <div class="header">
-            <a href="index.php"><img src="images/logo.png" class="logo" /></a>
-            <h1>Jaelyn's Plant Shop</h1>
-            <div>
-                <!--NAVBAR-->
-                <ul id="navbar">
-                    <li><a class="active" href="index.php">Home</a></li>
-                    <li><a href="shop.php">Shop</a></li>
-                    <li><a href="deals.php">Deals</a></li>
-                    <li><a href="about.php">About</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    <li>
-                        <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </li>
-                    <li>
-                    <?php if ($isLoggedIn): ?>
-                    <a href="logout.php" class="sign_out">sign out</a>
-                <?php else: ?>
-                    <a href="login.html" class="sign_in">sign in</a>
-                <?php endif; ?>
-                    </li>
-                    <a href="login.html" id="close"><i class="fa-solid fa-xmark"></i></a>
-                </ul>
-            </div>
-            <div id="mobile">
-                <a href="cart.php" id="cart"><i class="fa-solid fa-basket-shopping"></i></a>
-                <i id="bar"><i class="fa-solid fa-bars"></i></i>
-            </div>
+    <div class="header">
+        <a href="index.php"><img src="images/logo.png" class="logo" /></a>
+        <h1>Jaelyn's Plant Shop</h1>
+        <div>
+            <!--NAVBAR-->
+            <ul id="navbar">
+                <li><a class="active" href="index.php">Home</a></li>
+                <li><a href="shop.php">Shop</a></li>
+                <li><a href="deals.php">Deals</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
+                <li>
+                    <a href="cart.php" id="cart">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <span id="cart-count"><?php echo $cartCount; ?></span>
+                    </a>
+                </li>
+                <li>
+                <?php if ($isLoggedIn): ?>
+                <a href="logout.php" class="sign_out">sign out</a>
+            <?php else: ?>
+                <a href="login.html" class="sign_in">sign in</a>
+            <?php endif; ?>
+                </li>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
+            </ul>
         </div>
-    </header>
+        <div id="mobile">
+            <i id="bar"><i class="fa-solid fa-bars"></i></i>
+        </div>
+      </div>
+  </header>
+        <!-- <div id="mobile">
+                    <a href="cart.php" id="cart-mobile">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <span id="cart-count"><?php echo $cartCount; ?></span>
+                        <i id="bar"><i class="fa-solid fa-bars"></i></i>
+                    </a>
+            
+        </div> -->
+
+
+
 
     <?php if ($logoutMessage): ?>
         <div id="logoutPopup" class="popup">
@@ -82,46 +118,49 @@ ob_end_flush();
 
 
     <main>
-        <section class="home-container">
-            <div class="home-txt">
-                <h1 class="head-txt">Unleash the beauty of nature in your home today! </h1>
-                <p>Welcome to our green oasis! Discover a world of lush, vibrant plants that bring life and joy to any
-                    space. Whether you're a seasoned gardener or just starting your plant journey, we have the perfect
-                    greenery for you. From everyday favorites to exclusive deals, your next plant companion awaits.
-                    Let's grow together!</p>
-                <a href="deals.php">shop deals</a>
-                <a href="shop.php">shop all</a>
+    <section class="home-container">
+        <div class="home-txt">
+            <h1 class="head-txt">Unleash the beauty of nature in your home today! </h1>
+            <p>
+                Welcome to our green oasis! Discover a world of lush, vibrant plants that bring life and joy to any
+                space. Whether you're a seasoned gardener or just starting your plant journey, we have the perfect
+                greenery for you. From everyday favorites to exclusive deals, your next plant companion awaits.
+                Let's grow together!
+            </p>
+            <a href="deals.php">shop deals</a>
+            <a href="shop.php">shop all</a>
+        </div>
+        <div class="home-img img-opacity">
+            <div class="overlay"></div>
+            <div class="swiper-txt">
+                <h4>Bring nature home with our stunning collection of plants!</h4>
+                <p>
+                    Shop from our diverse collection of beautiful flowers, succulents, cacti, and more to find the
+                    perfect addition to your home.
+                </p>
             </div>
-            <div class="home-img img-opacity">
-                <div class="overlay"></div>
-                <div class="swiper-txt">
-                    <h4>Bring nature home with our stunning collection of plants!</h4>
-                    <p>Shop from our diverse collection of beautiful flowers, succulents, cacti, and more to find the
-                        perfect addition to your home.
-                    </p>
-                </div>
 
-                <div class="swiper-wrapper-container">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" onclick="window.location.href='product.php?id=4'">
-                                <img src="images/Slides/succulent-s1.jpg" alt="image of succulent in pot" />
-                            </div>
-                            <div class="swiper-slide" onclick="window.location.href='product.php?id=5'">
-                                <img src="images/Slides/flower-s2.jpg" alt="image of flowers" />
-                            </div>
-                            <div class="swiper-slide" onclick="window.location.href='product.php?id=11'">
-                                <img src="images/Slides/bouquet-s3.jpg" alt="image of flower bouquet" />
-                            </div>
+            <div class="swiper-wrapper-container">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" onclick="window.location.href='product.php?id=4'">
+                            <img src="images/Slides/succulent-s1.jpg" alt="image of succulent in pot" />
                         </div>
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
+                        <div class="swiper-slide" onclick="window.location.href='product.php?id=5'">
+                            <img src="images/Slides/flower-s2.jpg" alt="image of flowers" />
+                        </div>
+                        <div class="swiper-slide" onclick="window.location.href='product.php?id=11'">
+                            <img src="images/Slides/bouquet-s3.jpg" alt="image of flower bouquet" />
+                        </div>
                     </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
+        </div>
 
-        </section>
+    </section>
 
         <!-- NEW ARRIVALS -->
         <section id="product1" class="section-p1">
@@ -239,34 +278,26 @@ ob_end_flush();
         });
     </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var logoutPopup = document.getElementById("logoutPopup");
-        var closePopup = document.getElementById("closePopupLogout");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var logoutPopup = document.getElementById("logoutPopup");
+            var closePopup = document.getElementById("closePopupLogout");
 
-        // Show the popup if there's a logout message
-        <?php if ($logoutMessage): ?>
-            logoutPopup.style.display = "block";
-        <?php endif; ?>
+            <?php if ($logoutMessage): ?>
+                logoutPopup.style.display = "block";
+            <?php endif; ?>
 
-        // Close the popup when the close button is clicked
-        closePopup.onclick = function() {
-            logoutPopup.style.display = "none";
-        };
-
-        // Close the popup if the user clicks anywhere outside the popup
-        window.onclick = function(event) {
-            if (event.target == logoutPopup) {
+            closePopup.onclick = function() {
                 logoutPopup.style.display = "none";
-            }
-        };
-    });
-</script>
+            };
 
-
-    <script src="fetch_home.js"></script>
-    <script src="script.js"></script>
-
+            window.onclick = function(event) {
+                if (event.target == logoutPopup) {
+                    logoutPopup.style.display = "none";
+                }
+            };
+        });
+    </script>
 
 </body>
 
